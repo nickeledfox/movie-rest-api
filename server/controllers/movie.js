@@ -43,6 +43,31 @@ exports.insertSingleMovie = async (req, res) => {
   }
 };
 
+// PATCH (update) moovie by id
+exports.updateSingleMovie = async (req, res) => {
+  let ID = req.params.id;
+  let title = req.body.title;
+
+  try {
+    const updateMovie = await Movie.updateOne({ _id: ID }, { title: title });
+    res.json(updateMovie);
+  } catch (error) {
+    res.status(400).json({ message: err });
+  }
+};
+
+// DELETE moovie by id
+exports.deleteSingleMovie = async (req, res) => {
+  let ID = req.params.id;
+
+  try {
+    const data = await Movie.deleteOne({ _id: ID });
+    res.json(data);
+  } catch (error) {
+    res.status(400).json({ message: err });
+  }
+};
+
 // helper to insert data to db:
 // use with
 // exports.movieList = async (req, res) => {
