@@ -18,6 +18,27 @@ exports.movieList = async (req, res) => {
     const movies = await Movie.find(query).limit(limitRecords).skip(skip);
     res.json({ page: page, limit: limitRecords, movies });
   } catch (err) {
+    logMyErrors();
+  }
+};
+
+// POST single moovie
+exports.insertSingleMovie = async (req, res) => {
+  const newMovie = new Movie({
+    adult: false,
+    title: req.body.title,
+    description: req.body.description,
+    homepage: req.body.homepage,
+    genres: req.body.genres,
+    thumbnail: req.body.thumbnail,
+    original_language: req.body.original_language,
+    runtime: req.body.runtime,
+    production_companies: req.body.production_companies,
+  });
+  try {
+    await newMovie.save();
+    res.json(newMovie);
+  } catch (err) {
     res.status(400).json({ message: err });
   }
 };

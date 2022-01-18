@@ -4,5 +4,6 @@ const controller = require("../controllers/movie");
 
 // routes
 router.get("/api/movies/", controller.movieList);
+router.post("/api/movies/", controller.insertSingleMovie);
 
 module.exports = router;
