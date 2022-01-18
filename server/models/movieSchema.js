@@ -43,4 +43,6 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
+movieSchema.index({ "$**": "text" }); // everything
+
 module.exports = mongoose.model("Movie", movieSchema);
